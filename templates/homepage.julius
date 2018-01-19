@@ -31,4 +31,30 @@ $(function() {
     });
 
   });
+
+  $("#send-json").on('click', function(event) {
+    var string = "";
+
+    for (i = 0; i < 55000; i++) {
+      string += "a".repeat(64)
+      string += "\n"
+    }
+
+    $.ajax({
+      url: '@{LargeJsonR}',
+      type: 'POST',
+      contentType: "application/json",
+      data: JSON.stringify({
+        bigString: string,
+      }),
+      success: function (data) {
+        console.log(data);
+      },
+      error: function (data) {
+        console.log("Error: " + data);
+      },
+    });
+  });
 });
+
+

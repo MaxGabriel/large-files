@@ -57,6 +57,7 @@ type Form x = Html -> MForm (HandlerT App IO) (FormResult x, Widget)
 -- Please see the documentation for the Yesod typeclass. There are a number
 -- of settings which can be configured by overriding methods here.
 instance Yesod App where
+    maximumContentLength _ _ = Just (10 * 1024 * 1024) -- 10 megabytes
     -- Controls the base of generated URLs. For more information on modifying,
     -- see: https://github.com/yesodweb/yesod/wiki/Overriding-approot
     approot = ApprootRequest $ \app req ->
